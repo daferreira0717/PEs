@@ -1,0 +1,84 @@
+/*
+ * Dante Ferreira
+ * 10 - 24 - 25
+ * Prompts the player with a menu, gathers the players input, then returns the input as an integer
+ */
+
+Main();
+void Main()
+{
+    int playerNumChoice = 0;
+    string playerTemperatureString = "";
+    float playerTemperatureFloat = 0f;
+    while (playerNumChoice != 4)
+    {
+        playerNumChoice = PrintMenuGetChoice();
+        switch (playerNumChoice)
+        {
+            case 1:
+                Console.Write("Enter a temperature: ");
+                playerTemperatureString = Console.ReadLine();
+                playerTemperatureFloat = float.Parse(playerTemperatureString);
+                if(playerTemperatureFloat >= 40 && playerTemperatureFloat < 65)
+                {
+                    Console.WriteLine(playerTemperatureFloat + " is Chilly!");
+                } else if (playerTemperatureFloat >= 65 && playerTemperatureFloat < 75)
+                {
+                    Console.WriteLine(playerTemperatureFloat + " is Warm!");
+                }
+                else
+                {
+                    Console.WriteLine(playerTemperatureFloat + " is Unsure!");
+                }
+                    break;
+            case 2:
+                string[] months = ["January", "February", "March", "April", "May"];
+                for(int i = 4; i >= 0; i--)
+                {
+                    Console.WriteLine("Index " + i + " is " + months[i]);
+                }
+                for(int i = 0; i <= 4; i++)
+                {
+                    int numCharactersRemoved = (months[i]).Length - 3;
+                    Console.WriteLine(months[i].Remove(0, numCharactersRemoved));
+                }
+                break;
+            case 3:
+                Console.WriteLine("Sum of squares of first 1 integer(s) is " + SumSquares(1) + ".");
+                Console.WriteLine("Sum of squares of first 2 integer(s) is " + SumSquares(2) + ".");
+                Console.WriteLine("Sum of squares of first 3 integer(s) is " + SumSquares(3) + ".");
+                Console.WriteLine("Sum of squares of first 4 integer(s) is " + SumSquares(4) + ".");
+                break;
+        }
+    }
+    Console.WriteLine("Goodbye!");
+}
+
+//Prints out the menu, takes an integer 1 - 4 from the player, then loops if the integer is out of range, else it returns the value
+static int PrintMenuGetChoice()
+{
+    int playerMenuChoiceInt = 0;
+    string playerMenuChoiceString = "";
+    Console.WriteLine("Select one of the following options: \n     1. Get weather conditions \n     2. Create, populate, and list an array \n     3. Sum the squares of first N numbers \n     4. Quit");
+    Console.Write("Enter an option number (1 - 4): ");
+    playerMenuChoiceString = Console.ReadLine();
+    playerMenuChoiceInt = int.Parse(playerMenuChoiceString);
+    while ((playerMenuChoiceInt > 4) || (playerMenuChoiceInt < 1))
+    {
+        playerMenuChoiceString = Console.ReadLine();
+        playerMenuChoiceInt = int.Parse(playerMenuChoiceString);
+        Console.Write("Invalid option. Try again: ");
+    }
+
+    return playerMenuChoiceInt;
+}
+
+static int SumSquares(int n)
+{
+    int sum = 0;
+    for (int i = n; i >= 0; i--)
+    {
+        sum = sum + (i * i);
+    }
+    return sum;
+}
